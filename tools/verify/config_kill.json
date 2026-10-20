@@ -1,0 +1,5 @@
+{"schema":1,"global":{"masterEnabled":false,"auditLevel":"VERBOSE","redactSensitive":false},
+ "policies":{"io.github.imkamaran.agprobe":{"packageName":"io.github.imkamaran.agprobe","enabled":true,
+   "location":{"mode":"SIMULATE","latitude":48.8584,"longitude":2.2945,"accuracyMeters":12.0,"altitudeMeters":35.0},
+   "identifiers":{"androidId":"SIMULATE","deviceInfo":"SIMULATE","deviceProfile":"galaxy_s23","seed":"00112233445566778899aabbccddeeff"},
+   "auditEnabled":true,"updatedAt":1}}}

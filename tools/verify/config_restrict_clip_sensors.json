@@ -1,0 +1,6 @@
+{"schema":1,"global":{"masterEnabled":true,"auditLevel":"ACTIONS","redactSensitive":true},
+ "policies":{"io.github.imkamaran.agprobe":{"packageName":"io.github.imkamaran.agprobe","enabled":true,
+   "clipboard":{"mode":"RESTRICT"},
+   "sensors":{"mode":"RESTRICT","restrictedGroups":["motion","compass"]},
+   "identifiers":{"seed":"00112233445566778899aabbccddeeff"},
+   "auditEnabled":true,"updatedAt":100}}}

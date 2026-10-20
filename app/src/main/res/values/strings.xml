@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AppGuard</string>
+    <string name="xposed_description">Per-app control of location, device identifier, clipboard and sensor API behavior, with a local audit log.</string>
+
+    <!-- Recommended scope shown by LSPosed; users add the apps they configure. -->
+    <string-array name="xposed_scope">
+        <item>io.github.imkamaran.agprobe</item>
+    </string-array>
+</resources>
