@@ -20,6 +20,21 @@ Settings kill switch, and light/dark/system themes with optional dynamic color.
 | Sensors (Audit only / Restrict by group) | Verified | Motion, compass, environment, activity, body groups |
 | Crash-loop protection | Verified | Suspends a policy after 3 start-up crashes |
 
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/screenshots/home.png" width="240" alt="Home: protection status, coverage by category and privacy report"><br><sub>Home</sub></td>
+    <td align="center"><img src="docs/screenshots/apps.png" width="240" alt="App list with icons for each protected category"><br><sub>Apps</sub></td>
+    <td align="center"><img src="docs/screenshots/policy.png" width="240" alt="Per-app policy editor header"><br><sub>Policy editor</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/policy_details.png" width="240" alt="Network section in Simulate mode with the synthetic router preview"><br><sub>Network &amp; SIM controls</sub></td>
+    <td align="center"><img src="docs/screenshots/audit.png" width="240" alt="Audit log of simulated and restricted accesses"><br><sub>Audit log</sub></td>
+    <td align="center"><img src="docs/screenshots/about.png" width="240" alt="Settings: feature verification status and About panel"><br><sub>Diagnostics &amp; About</sub></td>
+  </tr>
+</table>
+
 See [docs/LIMITATIONS.md](docs/LIMITATIONS.md) before relying on any control, and
 [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for tested environments.
 
