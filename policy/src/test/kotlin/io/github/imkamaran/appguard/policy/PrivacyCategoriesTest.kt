@@ -106,6 +106,22 @@ class PrivacyCategoriesTest {
         assertTrue(CarrierProfiles.byId(CarrierProfiles.DEFAULT_ID) != null)
     }
 
+    /** ServiceState and the cell identity getters split MCC+MNC into these fields. */
+    @Test
+    fun carrierProfilesSplitIntoMccAndMnc() {
+        val sixDigits = CarrierProfiles.byId("tmobile_us")!!
+        assertEquals(310, sixDigits.mcc)
+        assertEquals(260, sixDigits.mnc)
+        assertEquals("310", sixDigits.mccString)
+        assertEquals("260", sixDigits.mncString)
+
+        // Five-digit MCC+MNC: the MNC is a single digit, which must not be padded or dropped.
+        val fiveDigits = CarrierProfiles.byId("vodafone_uk")!!
+        assertEquals(234, fiveDigits.mcc)
+        assertEquals(15, fiveDigits.mnc)
+        assertEquals("15", fiveDigits.mncString)
+    }
+
     @Test
     fun oldRecordsWithoutNewFieldsStillDecode() {
         val raw = """{"packageName":"$pkg","enabled":true,"clipboard":{"mode":"RESTRICT"}}"""

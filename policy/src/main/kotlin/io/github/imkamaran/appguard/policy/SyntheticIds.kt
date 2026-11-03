@@ -100,6 +100,18 @@ object DeviceProfiles {
 
 /** A mobile carrier as TelephonyManager reports it: MCC+MNC, display name and ISO country. */
 data class CarrierProfile(val id: String, val label: String, val mccMnc: String, val name: String, val countryIso: String) {
+    /** MCC, the first three digits of [mccMnc], as ServiceState and the cell identity int getters report it. */
+    val mcc: Int get() = mccMnc.take(3).toInt()
+
+    /** MNC, the digits after the MCC, as the cell identity int getters report it. */
+    val mnc: Int get() = mccMnc.drop(3).toInt()
+
+    /** MCC as the cell identity getMccString getter reports it. */
+    val mccString: String get() = mccMnc.take(3)
+
+    /** MNC as the cell identity getMncString getter reports it. */
+    val mncString: String get() = mccMnc.drop(3)
+
     fun isWellFormed(): Boolean =
         mccMnc.length in 5..6 && mccMnc.all { it.isDigit() } && name.isNotBlank() && countryIso.length == 2 && countryIso.all { it in 'a'..'z' }
 }
