@@ -61,8 +61,11 @@ there. Anything that does not go through those methods in that process is not af
 
 ## Phone & SIM info
 
-- Restrict looks like no SIM is inserted: empty operator, operator name and country, no phone number or GID1, unknown carrier id, and no active subscriptions. SIM state, calls and mobile data are untouched.
-- Simulate reports one of the built-in carrier profiles (MCC/MNC, name, country). The phone number stays hidden and the subscription list is empty, since each record carries the real carrier and number.
+- Hooked: the TelephonyManager operator, operator-name, country, phone-number, GID1 and carrier-id getters; the SubscriptionManager subscription queries; the ServiceState operator getters (numeric and alpha long/short); and the MCC/MNC and operator-name getters of CellIdentityLte/Gsm/Wcdma/Nr/Tdscdma.
+- ServiceState and CellIdentity are parcelable value objects the framework builds in the app process, so they are intercepted wherever the app obtains them: getServiceState, getAllCellInfo, NetworkRegistrationInfo and TelephonyCallback/PhoneStateListener callbacks. Hooking only the manager would leave their MCC/MNC real while the manager answered with the simulated carrier.
+- Restrict looks like no SIM is inserted: empty operator, operator name and country, no phone number or GID1, unknown carrier id, no active subscriptions, and no MCC/MNC in ServiceState or the serving cell. SIM state, calls and mobile data are untouched.
+- Simulate reports one of the built-in carrier profiles (MCC/MNC, name, country) on every path. The phone number stays hidden and the subscription list is empty, since each record carries the real carrier and number.
+- Not covered: the SIM state, TAC, CI/ECI, PCI, EARFCN, the radio technology, cell signal strengths, and native or binder-level reads in the phone process.
 - Country can still be inferred from the locale, time zone, IP address or location.
 
 ## Crash-loop protection

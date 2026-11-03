@@ -25,6 +25,10 @@ import android.provider.CalendarContract
 import android.provider.CallLog
 import android.provider.ContactsContract
 import android.provider.Settings
+import android.telephony.CellIdentityGsm
+import android.telephony.CellIdentityLte
+import android.telephony.CellIdentityNr
+import android.telephony.CellIdentityWcdma
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import java.net.NetworkInterface
@@ -242,6 +246,38 @@ class ProbeActivity : Activity() {
         report("phone.subs", guard {
             val subs = sm.activeSubscriptionInfoList
             "count=${subs?.size} first=${subs?.firstOrNull()?.carrierName}"
+        })
+        // ServiceState and CellIdentity are parcelable value objects built in this process, so an
+        // app that reads the carrier from them never calls a TelephonyManager getter.
+        report("phone.servicestate", guard {
+            val ss = tm.serviceState ?: return@guard "null"
+            "numeric=${ss.operatorNumeric} long=${ss.operatorAlphaLong} short=${ss.operatorAlphaShort}"
+        })
+        // Only Lte/Gsm/Wcdma expose the int getters; Nr and Tdscdma only the string ones.
+        @Suppress("DEPRECATION")
+        report("phone.cell", guard {
+            val id = tm.allCellInfo?.firstOrNull()?.cellIdentity ?: return@guard "none"
+            val mcc = when (id) {
+                is CellIdentityLte -> "${id.mcc}/${id.mccString}"
+                is CellIdentityGsm -> "${id.mcc}/${id.mccString}"
+                is CellIdentityWcdma -> "${id.mcc}/${id.mccString}"
+                is CellIdentityNr -> id.mccString
+                else -> "?"
+            }
+            val mnc = when (id) {
+                is CellIdentityLte -> "${id.mnc}/${id.mncString}"
+                is CellIdentityGsm -> "${id.mnc}/${id.mncString}"
+                is CellIdentityWcdma -> "${id.mnc}/${id.mncString}"
+                is CellIdentityNr -> id.mncString
+                else -> "?"
+            }
+            val mno = when (id) {
+                is CellIdentityLte -> id.mobileNetworkOperator
+                is CellIdentityGsm -> id.mobileNetworkOperator
+                is CellIdentityWcdma -> id.mobileNetworkOperator
+                else -> "?"
+            }
+            "${id.javaClass.simpleName} mcc=$mcc mnc=$mnc mobileNetworkOperator=$mno"
         })
     }
 

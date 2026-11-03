@@ -14,7 +14,7 @@ Settings kill switch, and light/dark/system themes with optional dynamic color.
 | Location via `LocationManager` (Restrict / Simulate) | Verified | Play services fused location is **not** covered |
 | Wi-Fi network identity (Restrict / Simulate) | Verified | SSID, BSSID, MAC, local IP, nearby-network scans |
 | Contacts, call log & calendar (Restrict per source) | Verified | Queries return no rows; columns are kept so apps don't crash |
-| Phone & SIM info (Restrict / Simulate carrier) | Verified | Operator, country, phone number, carrier id, subscriptions |
+| Phone & SIM info (Restrict / Simulate carrier) | Verified | Operator name/country, ServiceState and cell MCC/MNC, phone number, carrier id, subscriptions |
 | Audit log (local, filterable, JSON/CSV export) | Verified | |
 | Clipboard reads (Restrict) | Verified | Writes and keyboard paste are never affected |
 | Sensors (Audit only / Restrict by group) | Verified | Motion, compass, environment, activity, body groups |
