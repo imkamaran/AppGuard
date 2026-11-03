@@ -136,13 +136,16 @@ enum class Feature(
         listOf(
             "TelephonyManager: SIM/network operator, operator name and country, phone number, GID1, carrier id",
             "SubscriptionManager.getActiveSubscriptionInfoList / getActiveSubscriptionInfo / ForSimSlotIndex",
+            "ServiceState.getOperatorNumeric / getOperatorAlphaLong / getOperatorAlphaShort (covers getServiceState and TelephonyCallback/PhoneStateListener deliveries)",
+            "CellIdentityLte/Gsm/Wcdma/Nr/Tdscdma getMcc, getMnc, getMccString, getMncString and operator name (covers getAllCellInfo and NetworkRegistrationInfo)",
         ),
         listOf(
-            "Restrict looks like no SIM: empty operator and country, no phone number, no subscriptions. SIM state, calls and data still work.",
-            "Simulate reports the chosen carrier's MCC/MNC, name and country; the phone number stays hidden.",
+            "Restrict looks like no SIM: empty operator and country, no phone number, no subscriptions, and no MCC/MNC in ServiceState or the serving cell. SIM state, calls and data still work.",
+            "Simulate reports the chosen carrier's MCC/MNC, name and country on every path, including ServiceState and the serving cell; the phone number stays hidden.",
             "Subscription lists (SubscriptionManager) are empty in both modes, since each record carries the real carrier and number.",
             "IMEI, IMSI and SIM serial are already blocked for normal apps since Android 10 and are not hooked.",
             "Country can still be inferred from the locale, time zone, IP address or location.",
+            "TAC, CI/ECI, PCI, EARFCN and the radio technology still describe the real network.",
         ),
         VERIFIED_ON,
     ),
